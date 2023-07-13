@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.Test;
 
 public class Script01Test 
@@ -19,7 +20,7 @@ public class Script01Test
   @Test
   public void test2() throws FileNotFoundException, IOException, ParseException
   {
-	  JSONParser jp = new JSONParser();
+	    JSONParser jp = new JSONParser();
 		Object ob = jp.parse(new FileReader("./jsondata/lims.json"));
 		JSONObject map = (JSONObject) ob;
 
@@ -34,6 +35,10 @@ public class Script01Test
 		{
 			driver = new FirefoxDriver();
 		}
+		else if (BROWSER.equalsIgnoreCase("ie")) 
+		{
+			driver = new InternetExplorerDriver();
+		}
 		else
 		{
 		driver = new  ChromeDriver();
@@ -41,6 +46,7 @@ public class Script01Test
 		
 		String URL = (String) (map.get("url"));
 		System.out.println(URL);
+		
 		
 		 driver.get(URL);
 		 driver.manage().window().maximize();
